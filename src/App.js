@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ContactsList from './components/ContactsList';
+import ContactDetails from './components/ContactDetails';
 import './App.css';
 
 class App extends Component {
@@ -8,6 +9,7 @@ class App extends Component {
 
     this.state = {
       contacts: [],
+      selectedContact: {},
     };
   }
 
@@ -20,11 +22,16 @@ class App extends Component {
       });
   }
 
+  handleClickContact(selectedContact) {
+    this.setState({ selectedContact });
+  }
+
   render() {
     return (
       <div>
         <h1>Contact App</h1>
-        <ContactsList contacts={this.state.contacts} />
+        <ContactsList contacts={this.state.contacts} clickContactHandler={this.handleClickContact.bind(this)} />
+        <ContactDetails contact={this.state.selectedContact} />
       </div>
     );
   }
